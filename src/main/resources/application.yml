@@ -1,0 +1,169 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: full-life-cycle-platform
+  datasource:
+#    test1:
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      jdbcUrl: jdbc:mysql://${SUPOS_MYSQL_HOST:10.97.69.154}:${SUPOS_MYSQL_PORT:3306}/${SUPOS_MYSQL_DBNAME:mywl_dt}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#      username: ${SUPOS_MYSQL_USERNAME:root}
+#      password: ${SUPOS_MYSQL_PASSWORD:rootkit}
+#      continue-on-error: true
+#      initialization-mode: always
+#      sql-script-encoding: utf-8
+#      hikari:
+#        maximumPoolSize: 10
+#        minimumIdle: 2
+#        idleTimeout: 600000
+#        connectionTimeout: 30000
+#        maxLifetime: 1800000
+#    #      schema:
+#    #        - classpath:db/schema-table.sql
+#    test2:
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      jdbcUrl: jdbc:mysql://${SUPOS_MYSQL_HOST:10.97.69.154}:${SUPOS_MYSQL_PORT:3306}/${SUPOS_MYSQL_DBNAME:supos_dt}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#      username: ${SUPOS_MYSQL_USERNAME:root}
+#      password: ${SUPOS_MYSQL_PASSWORD:rootkit}
+#      continue-on-error: true
+#      initialization-mode: always
+#      sql-script-encoding: utf-8
+#      hikari:
+#        maximumPoolSize: 10
+#        minimumIdle: 2
+#        idleTimeout: 600000
+#        connectionTimeout: 30000
+#        maxLifetime: 1800000
+#  #      schema:
+#  #        - classpath:db/schema-table.sql
+
+      test1:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbcUrl: jdbc:mysql://${SUPOS_MYSQL_HOST:121.199.36.184}:${SUPOS_MYSQL_PORT:3306}/${SUPOS_MYSQL_DBNAME:mywl_dt}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+        username: ${SUPOS_MYSQL_USERNAME:root}
+        password: ${SUPOS_MYSQL_PASSWORD:67328336}
+      test2:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbcUrl: jdbc:mysql://${SUPOS_MYSQL_HOST:121.199.36.184}:${SUPOS_MYSQL_PORT:3306}/${SUPOS_MYSQL_DBNAME:supos_dt}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+        username: ${SUPOS_MYSQL_USERNAME:root}
+        password: ${SUPOS_MYSQL_PASSWORD:67328336}
+
+      url: jdbc:mysql://121.199.36.184:3306/mywl_dt?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      username: ${SUPOS_MYSQL_USERNAME:root}
+      password: ${SUPOS_MYSQL_PASSWORD:67328336}
+      continue-on-error: true
+      initialization-mode: always
+      sql-script-encoding: utf-8
+      hikari:
+        maximumPoolSize: 10
+        minimumIdle: 2
+        idleTimeout: 600000
+        connectionTimeout: 30000
+        maxLifetime: 1800000
+      schema:
+        - classpath:db/schema-table.sql
+  redis:
+    database: 0 #redis数据库索引，默认为0
+#    host: 192.168.0.230 #redis服务器地址
+#    port: 6379 #redis服务器连接端口
+#    password: 123456 #redis服务器连接密码，默认为null
+    host: 124.199.36.184 #redis服务器地址
+    port: 6379 #redis服务器连接端口
+    password: 123 #redis服务器连接密码，默认为null
+    timeout: 15000 #redis连接超时时间
+  mvc:
+    throw-exception-if-no-handler-found: true
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+mybatis-plus:
+  mapper-locations:
+    - classpath*:mappers/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+logging:
+  level:
+    root: info
+    org:
+      springframework: OFF
+
+# 定义日志打印的路径
+log:
+  file:
+    path: /home/cxl/文档/SDK/code/platform-life-cycle
+
+supOS:
+#  iot:
+#    authToken: ${SUPOS_IOT_AUTHTOKEN:33b23520-0417-11ee-aab4-850cea95b42c}
+#    endPointId: ${SUPOS_IOT_ENDPOINTID:301322070904}
+#    endPointName: ${SUPOS_IOT_ENDPOINTNAME:mqtt1}
+#  iot:
+#    authToken: ${SUPOS_IOT_AUTHTOKEN:cee1eb50-8052-11ee-9263-97c97450a029}
+#    endPointId: ${SUPOS_IOT_ENDPOINTID:30132207090412}
+#    endPointName: ${SUPOS_IOT_ENDPOINTNAME:huili}
+  iot:
+    authToken: ${SUPOS_IOT_AUTHTOKEN:e30da0a0-5933-11ef-a91f-eb7a7c091394}
+    endPointId: ${SUPOS_IOT_ENDPOINTID:30132207090466}
+    endPointName: ${SUPOS_IOT_ENDPOINTNAME:mqtttest}
+
+
+person:
+  default:
+    status: sys_person_status/onWork
+    mainPosition: 2
+    companyId: 1000
+    password: 88888888
+    gender: sys_gender/male
+    createUser: true
+
+user:
+  default:
+    password: 12345678
+    timeZone: GMT+0800
+    companyCode: default_org_company
+    accountType: 0
+    recoveryDeleted: false
+
+mqtt:
+  config:
+    #    采集器
+    channel1:
+      consumer-enable: true
+      producer-enable: true
+#      url: tcp://${SUPOS_MQTT_HOST:121.37.153.171}:${SUPOS_MQTT_PORT:1893}
+      url: tcp://${SUPOS_MQTT_HOST:192.168.0.230}:${SUPOS_MQTT_PORT:1883}
+      topics:
+        - Topic/+/system/+
+      qos: 2
+      username: ${SUPOS_MQTT_USERNAME:admin}
+      password: ${SUPOS_MQTT_PASSWORD:mywlmqtt}
+      timeout: 60
+      kep-alive-interval: 60
+      async: true
+      automatic-reconnect: true
+      clean-session: true
+      max-inflight: 50
+      #mqtt-version:
+      client-id-append-ip: false
+      consumer-client-id: consumer_client1555
+      producer-client-id: producer_client1555
+    #    平台
+    channel2:
+#      url: tcp://${SUPOS_PLATFORM_MQTT_HOST:124.71.186.8}:${SUPOS_PLATFORM_MQTT_PORT:32566}
+      url: tcp://${SUPOS_PLATFORM_MQTT_HOST:10.0.60.127}:${SUPOS_PLATFORM_MQTT_PORT:32566}
+      topics:
+#        - /cee1eb50-8052-11ee-9263-97c97450a029/30132207090412/huili/#
+        - /e30da0a0-5933-11ef-a91f-eb7a7c091394/30132207090412/mqtttest/#
+      qos: 2
+      username: ${SUPOS_PLATFORM_MQTT_USERNAME:admin}
+      password: ${SUPOS_PLATFORM_MQTT_PASSWORD:public}
+      timeout: 60
+      kep-alive-interval: 60
+      async: true
+      automatic-reconnect: true
+      clean-session: true
+      max-inflight: 50
+      #mqtt-version:
+      client-id-append-ip: false
+      consumer-client-id: consumer_client66
+      producer-client-id: producer_client66
